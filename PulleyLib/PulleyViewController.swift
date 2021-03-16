@@ -1829,6 +1829,16 @@ extension PulleyViewController: UIScrollViewDelegate {
                 
                 backgroundDimmingView.isUserInteractionEnabled = true
             }
+            else if (self.drawerPosition == .partiallyRevealed)
+            {
+                delegate?.makeUIAdjustmentsForFullscreen?(progress: 0.0, bottomSafeArea: pulleySafeAreaInsets.bottom)
+                (drawerContentViewController as? PulleyDrawerViewControllerDelegate)?.makeUIAdjustmentsForFullscreen?(progress: 0.0, bottomSafeArea: pulleySafeAreaInsets.bottom)
+                (primaryContentViewController as? PulleyPrimaryContentControllerDelegate)?.makeUIAdjustmentsForFullscreen?(progress: 0.0, bottomSafeArea: pulleySafeAreaInsets.bottom)
+
+                backgroundDimmingView.alpha = backgroundDimmingOpacity
+                
+                backgroundDimmingView.isUserInteractionEnabled = true
+            }
             else
             {
                 if backgroundDimmingView.alpha >= 0.001
