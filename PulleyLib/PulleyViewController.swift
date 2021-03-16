@@ -1635,7 +1635,7 @@ extension PulleyViewController: PulleyPassthroughScrollViewDelegate {
     {
         if currentDisplayMode == .drawer
         {
-            if drawerPosition == .open
+            if drawerPosition == .open || drawerPosition == .partiallyRevealed
             {
                 return backgroundDimmingView
             }
