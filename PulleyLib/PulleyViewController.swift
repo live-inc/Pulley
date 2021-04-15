@@ -1273,8 +1273,8 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
         }
 
         let lowestStop = getStopList().min() ?? 0
-        
-        drawerContentContainer.frame = CGRect(x: 0.0, y: drawerScrollView.bounds.height - lowestStop , width: drawerScrollView.bounds.width, height: drawerScrollView.contentOffset.y + lowestStop + bounceOverflowMargin)
+         
+        drawerContentContainer.frame = CGRect(x: 0.0, y: drawerScrollView.bounds.height - lowestStop , width: drawerScrollView.bounds.width, height: drawerScrollView.contentOffset.y + lowestStop + (drawerPosition != .closed ? bounceOverflowMargin : 0))
         drawerBackgroundVisualEffectView?.frame = drawerContentContainer.frame
         drawerShadowView.frame = drawerContentContainer.frame
         
@@ -1419,7 +1419,7 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
         
         if animated
         {
-            UIView.transition(with: primaryContentContainer, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] () -> Void in
+            UIView.transition(with: primaryContentContainer, duration: animationDuration, options: .transitionCrossDissolve, animations: { [weak self] () -> Void in
                 
                 self?.primaryContentViewController = controller
                 
@@ -1462,7 +1462,7 @@ open class PulleyViewController: UIViewController, PulleyDrawerViewControllerDel
         
         if animated
         {
-            UIView.transition(with: drawerContentContainer, duration: 0.5, options: .transitionCrossDissolve, animations: { [weak self] () -> Void in
+            UIView.transition(with: drawerContentContainer, duration: animationDuration, options: .transitionCrossDissolve, animations: { [weak self] () -> Void in
                 
                 self?.drawerContentViewController = controller
                 self?.setDrawerPosition(position: position ?? (self?.drawerPosition ?? .collapsed), animated: false)
